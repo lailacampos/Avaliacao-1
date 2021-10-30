@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Avaliacao 1</string>
 
-<!--    Toasts-->
+    <!--    Toasts-->
     <string name="feature_not_implemented_toast">Desculpe! Essa funcionalidade ainda não foi implementada</string>
 
     <string name="app_title">Map Tracker</string>
@@ -55,7 +55,13 @@
     <string name="informacoes_trafego_ligado">Ligado</string>
     <string name="informacoes_trafego_desligado">Desligado</string>
 
-<!--    Credit Screen-->
+    <!--    Navegation Screen-->
+    <string name="barra_status_titulo">Dados de Localização\n</string>
+    <string name="current_latitude">Latitude: </string>
+    <string name="current_longitude">Longitude: </string>
+    <string name="current_speed">Velocidade: </string>
+
+    <!--    Credit Screen-->
     <string name="credito_desenvolvedor">Desenvolvedor:</string>
     <string name="nome_laila">Laila R. H. de Campos</string>
     <string name="versao_android_title">Versão do Android:</string>
@@ -65,5 +71,8 @@
     <string name="versao_app">Versão do Aplicativo:</string>
     <string name="versao_app_number">0.1.0</string>
     <string name="app_description">Este aplicativo tem como finalidade possibilitar ao usuário a visualização de sua posição em tempo real e a apresentação de um histórico do seu posicionamento ao longo do tempo. As opções de vizualização são configuráveis e é possível acessar informações referentes ao sistema de posicionamento por satélites</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

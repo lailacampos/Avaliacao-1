@@ -33,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void changeToNavegationScreen(View view) {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+    }
+
     public void changeToCreditScreen (View view) {
         Intent intentCredit = new Intent(this, CreditScreen.class);
         startActivity(intentCredit);

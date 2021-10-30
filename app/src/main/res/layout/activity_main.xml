@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:onClick="featureNotImplemented"
+        android:onClick="changeToNavegationScreen"
         android:text="@string/navegacao_button"
         app:cornerRadius="25dp"
         app:icon="@drawable/map_24"
