@@ -28,6 +28,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.laila.unifacs.avaliacao1.R;
 import com.laila.unifacs.avaliacao1.databinding.ActivityMapsBinding;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -126,6 +129,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     velocidade = location.getSpeed();
 
                     convertLatLong();
+                    convertVelocity();
 
                     savePreferences();
 
@@ -291,18 +295,104 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void convertLatLong() {
 
-        if (coordGeograficasRadionButtonSelected == R.id.grau_decimal_RadioButton) {
+        List<String> latLongList;
+
+        if (coordGeograficasRadionButtonSelected == R.id.grau_minuto_RadioButton) {
+
+            latLongList = convertLatLongGrauMinuto(latitude, longitude);
+
+            latitudeString = latLongList.get(0);
+            longitudeString = latLongList.get(1);
+        }
+        else if (coordGeograficasRadionButtonSelected == R.id.grau_minuto_segundo_RadioButton) {
+
+            latLongList = convertLatLongGrauMinutoSegundo(latitude, longitude);
+
+            latitudeString = latLongList.get(0);
+            longitudeString = latLongList.get(1);
+        }
+        else {
             latitudeString = Location.convert(latitude, Location.FORMAT_DEGREES);
             longitudeString = Location.convert(longitude, Location.FORMAT_DEGREES);
         }
-        else if (coordGeograficasRadionButtonSelected == R.id.grau_minuto_RadioButton) {
-            latitudeString = Location.convert(latitude, Location.FORMAT_MINUTES);
-            longitudeString = Location.convert(longitude, Location.FORMAT_MINUTES);
-        }
-        else if (coordGeograficasRadionButtonSelected == R.id.grau_minuto_segundo_RadioButton) {
-            latitudeString = Location.convert(latitude, Location.FORMAT_SECONDS);
-            longitudeString = Location.convert(longitude, Location.FORMAT_SECONDS);
-        }
+    }
+
+    private List<String> convertLatLongGrauMinutoSegundo(double lat, double longi) {
+
+        StringBuilder latBuilder = new StringBuilder();
+        StringBuilder longBuilder = new StringBuilder();
+        List<String> latLongList = new ArrayList<String>();
+
+        String latString = Location.convert(Math.abs(lat), Location.FORMAT_SECONDS);
+        String[] latSplit = latString.split(":");
+
+        latBuilder.append(latSplit[0]);
+        latBuilder.append("º");
+        latBuilder.append(latSplit[1]);
+        latBuilder.append("'");
+        latBuilder.append(latSplit[2]);
+        latBuilder.append("\"");
+        latBuilder.append(" ");
+
+        if (lat < 0) {latBuilder.append("S");}
+        else {latBuilder.append("N");}
+
+        String longString = Location.convert(Math.abs(longi), Location.FORMAT_SECONDS);
+        String[] longSplit = longString.split(":");
+
+        longBuilder.append(longSplit[0]);
+        longBuilder.append("º");
+        longBuilder.append(longSplit[1]);
+        longBuilder.append("'");
+        longBuilder.append(longSplit[2]);
+        longBuilder.append("\"");
+        longBuilder.append(" ");
+
+        if (longi < 0) {longBuilder.append("W");}
+        else {longBuilder.append("E");}
+
+        latLongList.add(latBuilder.toString());
+        latLongList.add(longBuilder.toString());
+
+        return latLongList;
+    }
+
+    private List<String> convertLatLongGrauMinuto(double lat, double longi) {
+
+        StringBuilder latBuilder = new StringBuilder();
+        StringBuilder longBuilder = new StringBuilder();
+        List<String> latLongList = new ArrayList<String>();
+
+        String latString = Location.convert(Math.abs(lat), Location.FORMAT_SECONDS);
+        String[] latSplit = latString.split(":");
+
+        latBuilder.append(latSplit[0]);
+        latBuilder.append("º");
+        latBuilder.append(latSplit[1]);
+        latBuilder.append("'");
+        latBuilder.append(latSplit[2]);
+        latBuilder.append("\"");
+        latBuilder.append(" ");
+
+        if (lat < 0) {latBuilder.append("S");}
+        else {latBuilder.append("N");}
+
+        String longString = Location.convert(Math.abs(longi), Location.FORMAT_SECONDS);
+        String[] longSplit = longString.split(":");
+
+        longBuilder.append(longSplit[0]);
+        longBuilder.append("º");
+        longBuilder.append(longSplit[1]);
+        longBuilder.append("'");
+        longBuilder.append(" ");
+
+        if (longi < 0) {longBuilder.append("W");}
+        else {longBuilder.append("E");}
+
+        latLongList.add(latBuilder.toString());
+        latLongList.add(longBuilder.toString());
+
+        return latLongList;
     }
 
     private void convertVelocity() {
